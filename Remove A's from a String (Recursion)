@@ -1,0 +1,23 @@
+public class Main {
+    public static void main(String[] args) throws Exception {
+        removeAllAs("baccdah", "");
+    }
+
+    private static void removeAllAs(String originalString, String newString) {
+        // If the originalString is empty this means the whole string has been checked, and you can print the answer
+        if(originalString.isEmpty()){
+            System.out.println(newString);
+            return;
+        }
+        // Store the first character of the string in a variable
+        char firstChar = originalString.charAt(0);
+        // If 'a' is the first character of the array we call the remove function again and not add the 'a' to the newString
+        if(firstChar == 'a'){
+            removeAllAs(originalString.substring(1), newString);
+        }
+        // If the first character is not 'a' call the function again and add the character to the newString
+        else{
+            removeAllAs(originalString.substring(1), newString + firstChar);
+        }
+    }
+}
