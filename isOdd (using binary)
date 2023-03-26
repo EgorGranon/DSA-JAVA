@@ -1,0 +1,9 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(isOdd1(7));
+    }
+
+    private static boolean isOdd1(int i) {
+        return (i & 1) == 1;
+    }
+}
