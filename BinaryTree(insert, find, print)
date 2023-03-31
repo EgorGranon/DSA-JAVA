@@ -1,0 +1,110 @@
+public class Main {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(50);
+        tree.insert(25);
+        tree.insert(75);
+        tree.insert(13);
+        tree.insert(89);
+        tree.insert(32);
+        tree.insert(66);
+        tree.insert(99);
+        tree.insert(1);
+        tree.print();
+        System.out.println(tree.find(99));
+
+    }
+}
+
+public class BinaryTree {
+
+    private class Node {
+        int data;
+        Node leftChild;
+        Node rightChild;
+        Node(int data){
+            this.data = data;
+            leftChild = rightChild = null;
+        }
+    }
+    Node root;
+
+    public BinaryTree() {
+        root = null;
+    }
+     public void insert(int data){
+        root = insert1(root, data);
+     }
+
+    private Node insert1(Node node, int data) {
+        if(node == null){
+            node = new Node(data);
+            return node;
+        }
+        if(data < node.data){
+            node.leftChild = insert1(node.leftChild, data);
+        }
+        else if (data > node.data){
+            node.rightChild = insert1(node.rightChild, data);
+        }
+        return node;
+    }
+
+    public Node find(int data){
+        Node node = findNode(root, data);
+        if(node == null){
+            return null;
+        }
+        return node;
+
+    }
+
+    private Node findNode(Node node, int data) {
+        if(node.data == data){
+            return node;
+        }
+        if(data < node.data){
+            return findNode(node.leftChild, data);
+        }
+        if(data > node.data){
+            return findNode(node.rightChild, data);
+        }
+        return null;
+    }
+    public void print(){
+        System.out.println("Print In Order:");
+        printInOrder(root);
+        System.out.println();
+        System.out.println("Print Pre Order");
+        printPreOrder(root);
+        System.out.println();
+        System.out.println(("Print Post Order"));
+        printPostOrder(root);
+        System.out.println();
+    }
+
+    private void printInOrder(Node node) {
+        if(node == null){
+            return;
+        }
+        printInOrder(node.leftChild);
+        System.out.print(node.data + " ");
+        printInOrder(node.rightChild);
+    }
+    private void printPreOrder(Node node) {
+        if(node == null){
+            return;
+        }
+        System.out.print(node.data + " ");
+        printInOrder(node.leftChild);
+        printInOrder(node.rightChild);
+    }
+    private void printPostOrder(Node node) {
+        if(node == null){
+            return;
+        }
+        printInOrder(node.leftChild);
+        printInOrder(node.rightChild);
+        System.out.print(node.data + " ");
+    }
+}
