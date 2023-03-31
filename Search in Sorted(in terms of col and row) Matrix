@@ -28,6 +28,7 @@ public class Main {
             }
             else{
                 row++;
+                col = mat[row].length-1;
             }
         }
         return new int[]{-1, -1};
