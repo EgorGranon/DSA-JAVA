@@ -1,0 +1,74 @@
+public class Main {
+    public static void main(String[] args) throws Exception {
+        CircQ circQ = new CircQ(5);
+        circQ.insert(89);
+        circQ.insert(21);
+        circQ.insert(54);
+        circQ.insert(77);
+        circQ.insert(1);
+        circQ.remove();
+        circQ.insert(100);
+        circQ.front();
+        circQ.display();
+    }
+}
+
+
+public class CircQ {
+
+    protected int[] data;
+    private static final int DEF = 10;
+
+    CircQ(int size){
+        this.data = new int[size];
+    }
+    CircQ(){
+        this(DEF);
+    }
+    int start = 0;
+    int end = 0;
+    int size = 0;
+
+    public boolean insert(int value) throws Exception {
+        if(isFull()){
+            throw new Exception("FULL");
+        }
+        data[end++] = value;
+        end %= data.length;
+        size++;
+        return true;
+    }
+    public boolean remove() throws Exception {
+        if(isEmpty()){
+            throw new Exception("Empty");
+        }
+        start++;
+        start = start % data.length;
+        size--;
+        return true;
+    }
+    public void front () throws Exception {
+        if(isEmpty()){
+            throw new Exception("Empty");
+        }
+        System.out.println(data[start]);
+    }
+    public void display() throws Exception {
+        if(isEmpty()){
+            throw new Exception("Empty");
+        }
+        int count = 0;
+        for(int i = start; count < size; i = (i + 1) % data.length){
+            System.out.print(data[i] + " ");
+            count++;
+        }
+        System.out.println();
+    }
+
+    public boolean isFull() {
+        return size == data.length;
+    }
+    private boolean isEmpty(){
+        return size == 0;
+    }
+}
