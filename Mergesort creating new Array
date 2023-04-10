@@ -1,0 +1,48 @@
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2,8,9,7,3,1,5,6,4};
+        int[] newArr = mergeSortBebKunal(arr);
+        System.out.println(Arrays.toString(newArr));
+    }
+
+    private static int[] mergeSortBebKunal(int[] arr) {
+        if(arr.length == 1){
+            return arr;
+        }
+        int mid = arr.length / 2;
+
+        int[] left = mergeSortBebKunal(Arrays.copyOfRange(arr, 0, mid));
+        int[] right = mergeSortBebKunal(Arrays.copyOfRange(arr, mid, arr.length));
+
+        return mergeEm(left,right);
+    }
+
+    private static int[] mergeEm(int[] left, int[] right) {
+        int[] mix = new int[right.length + left.length];
+        int l = 0, r = 0, k = 0;
+        while(l < left.length && r < right.length){
+            if(left[l] < right[r]){
+                mix[k] = left[l];
+                l++;
+            }
+            else{
+                mix[k] = right[r];
+                r++;
+            }
+            k++;
+        }
+        while(l < left.length){
+            mix[k] = left[l];
+            l++;
+            k++;
+        }
+        while(r < right.length){
+            mix[k] = right[r];
+            r++;
+            k++;
+        }
+        return mix;
+    }
+}
