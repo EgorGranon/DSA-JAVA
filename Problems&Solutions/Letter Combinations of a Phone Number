@@ -1,0 +1,30 @@
+public class Main {
+    public static void main(String[] args) {
+        dialPhone("","1023");
+    }
+    public static void dialPhone(String p, String up){
+        if(up.isEmpty()){
+            System.out.print(p + " ");
+            return;
+        }
+        int digit = up.charAt(0) - '0';
+        int i = 1;
+        while(digit == 1 || digit == 0){
+            if(i == up.length()){
+                return;
+            }
+            digit = up.charAt(i) - '0';
+            i++;
+        }
+        int start = (digit - 2) * 3;
+        int end = start + 3;
+        if(start == 7 || start == 9){
+            end += 1;
+        }
+
+        for(int c = start; c < end; c++){
+            char ch = (char) ('a' + c);
+            dialPhone(p + ch, up.substring(i));
+        }
+    }
+}
