@@ -1,0 +1,22 @@
+public class Main {
+    public static void main(String[] args) {
+        pattern17(4);
+    }
+
+    private static void pattern17(int n) {
+        for(int row = 1; row < n * 2; row++){
+            int sp = row <= n ? n - row : row - n;
+            int firstAndEnd = row <= n ? row : n * 2 - row;
+            for(int i = 1; i <= sp; i++){
+                System.out.print(" ");
+            }
+            for(int col = firstAndEnd; col >= 1; col--){
+                System.out.print(col);
+            }
+            for(int col = 2; col <= firstAndEnd; col++){
+                System.out.print(col);
+            }
+            System.out.println();
+        }
+    }
+}
