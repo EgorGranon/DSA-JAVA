@@ -1,0 +1,22 @@
+public class Main {
+    public static void main(String[] args) {
+        findPathMaze(3,3, "");
+
+    }
+
+    private static void findPathMaze(int row, int col, String ans) {
+        if(row == 1 && col == 1){
+            System.out.println(ans);
+            return;
+        }
+        if(col > 1 && row > 1){
+            findPathMaze(row - 1, col - 1, ans + 'd');
+        }
+        if(row > 1){
+            findPathMaze(row - 1, col, ans + 'D');
+        }
+        if(col > 1){
+            findPathMaze(row, col - 1, ans + 'R');
+        }
+    }
+}
