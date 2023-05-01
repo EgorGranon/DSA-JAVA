@@ -1,0 +1,36 @@
+public class Main {
+    public static void main(String[] args) {
+        boolean[][] board = {
+                {true, true, true},
+                {true, true, true},
+                {true, true, true}
+        };
+        findAllPath(board, 0, 0, "");
+    }
+
+    private static void findAllPath(boolean[][] board, int row, int col, String path) {
+        if(row == board.length - 1 && col == board[0].length - 1){
+            System.out.println(path);
+            return;
+        }
+        if (board[row][col] == false) {
+            return;
+        }
+
+        board[row][col] = false;
+
+        if(row < board.length - 1){
+            findAllPath(board, row + 1, col , path + 'D');
+        }
+        if(col < board[0].length - 1){
+            findAllPath(board, row, col + 1 , path + 'R');
+        }
+        if(row > 0){
+            findAllPath(board, row - 1, col, path + 'U');
+        }
+        if(col > 0){
+            findAllPath(board, row, col - 1, path + 'L');
+        }
+        board[row][col] = true;
+    }
+}
