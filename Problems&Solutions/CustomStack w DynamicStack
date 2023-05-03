@@ -1,0 +1,69 @@
+public class Main {
+    public static void main(String[] args) throws Exception {
+        CustomStack q = new DynamicStack(5);
+        q.push(7);
+        q.push(51);
+        q.push(4);
+        q.push(99);
+        q.push(3);
+        q.push(171);
+        q.peek();
+        q.pop();
+        q.peek();
+
+    }
+}
+public class CustomStack {
+   protected int[] data;
+   private static final int DEF = 10;
+
+   CustomStack(int size){
+       this.data = new int[size];
+   }
+   CustomStack(){
+       this(DEF);
+   }
+   int ptr = -1;
+   public boolean push(int val) throws Exception {
+        if(isFull()){
+            throw new Exception("IS FULL");
+        }
+        data[++ptr] = val;
+        return true;
+    }
+    public boolean pop() throws Exception {
+        if(isEmpty()){
+            throw new Exception("IS Empty");
+        }
+        int rem = data[ptr--];
+        return true;
+    }
+    public void peek(){
+        System.out.println(data[ptr]);
+    }
+
+    public boolean isFull() {
+       return ptr == data.length - 1;
+    }
+    private boolean isEmpty(){
+       return ptr == -1;
+    }
+}
+public class DynamicStack extends CustomStack{
+    DynamicStack(int size){
+        super(size);
+    }
+    DynamicStack(){
+        super();
+    }
+    public boolean push(int val) throws Exception {
+        if(this.isFull()){
+            int[] temp = new int[data.length * 2];
+            for(int i = 0; i < data.length; i++){
+                temp[i] = data[i];
+            }
+            data = temp;
+        }
+        return super.push(val);
+    }
+}
