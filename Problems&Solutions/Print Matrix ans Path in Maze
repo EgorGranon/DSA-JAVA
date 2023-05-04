@@ -1,0 +1,44 @@
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        boolean[][] maze = {
+                {true,true,true},
+                {true,true,true},
+                {true,true,true},
+        };
+        int[][] mazePath = new int[maze.length][maze[0].length];
+        findPath(maze, 0, 0, "", mazePath, 1);
+    }
+
+    private static void findPath(boolean[][] maze, int row, int col, String path, int[][] mazePath, int step) {
+        if(row == maze.length - 1 && col == maze[row].length - 1){
+            mazePath[row][col] = step;
+            for(int[] line : mazePath){
+                System.out.println(Arrays.toString(line));
+            }
+            System.out.println(path);
+            return;
+        }
+        if(!maze[row][col]){
+            return;
+        }
+        maze[row][col] = false;
+        mazePath[row][col] = step;
+
+        if(row < maze.length - 1){
+            findPath(maze, row + 1, col, path + 'D', mazePath, step + 1);
+        }
+        if(col < maze.length - 1){
+            findPath(maze, row, col + 1, path + 'R', mazePath, step + 1);
+        }
+        if(row > 0){
+            findPath(maze, row - 1, col, path + 'U', mazePath, step + 1);
+        }
+        if(col > 0){
+            findPath(maze, row, col - 1, path + 'L', mazePath, step + 1);
+        }
+        mazePath[row][col] = 0;
+        maze[row][col] = true;
+    }
+}
