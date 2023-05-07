@@ -1,0 +1,86 @@
+public class Main {
+
+    public static void main(String[] args) {
+        int[][] sudokuGrid = {
+                { 8, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 3, 6, 0, 0, 0, 0, 0 },
+                { 0, 7, 0, 0, 9, 0, 2, 0, 0 },
+                { 0, 5, 0, 0, 0, 7, 0, 0, 0 },
+                { 0, 0, 0, 0, 4, 5, 7, 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 3, 0 },
+                { 0, 0, 1, 0, 0, 0, 0, 6, 8 },
+                { 0, 0, 8, 5, 0, 0, 0, 1, 0 },
+                { 0, 9, 0, 0, 0, 0, 4, 0, 0 }
+        };
+        if (solve(sudokuGrid, 0, 0)) {
+            displayBoard(sudokuGrid);
+        } else {
+            System.out.println("No solution found");
+        }
+    }
+
+    private static boolean solve(int[][] sudokuGrid, int row, int col) {
+        if (row == sudokuGrid.length) {
+            return true;
+        }
+
+        if (col == sudokuGrid.length) {
+            return solve(sudokuGrid, row + 1, 0);
+        }
+
+        if (sudokuGrid[row][col] != 0) {
+            return solve(sudokuGrid, row, col + 1);
+        }
+
+        for (int i = 1; i <= 9; i++) {
+            if (isSafeRow(sudokuGrid, row, i) && isSafeCol(sudokuGrid, col, i) && isSafeBox(sudokuGrid, row, col, i)) {
+                sudokuGrid[row][col] = i;
+                if (solve(sudokuGrid, row, col + 1)) {
+                    return true;
+                }
+                sudokuGrid[row][col] = 0;
+            }
+        }
+        return false;
+    }
+
+    private static void displayBoard(int[][] sudokuGrid) {
+        for (int[] row : sudokuGrid) {
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static boolean isSafeBox(int[][] sudokuGrid, int row, int col, int potAns) {
+        int localRowS = row - row % 3;
+        int localColS = col - col % 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (potAns == sudokuGrid[localRowS + i][localColS + j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean isSafeCol(int[][] sudokuGrid, int col, int potAns) {
+        for (int i = 0; i < sudokuGrid.length; i++) {
+            if (potAns == sudokuGrid[i][col]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isSafeRow(int[][] sudokuGrid, int row, int potAns) {
+        for (int i = 0; i < sudokuGrid.length; i++) {
+            if (potAns == sudokuGrid[row][i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
