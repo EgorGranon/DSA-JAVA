@@ -6,7 +6,6 @@ public class Main {
         bubSort(arr);
         System.out.println(Arrays.toString(arr));
     }
-
     private static void bubSort(int[] arr) {
         boolean swapped;
         for(int i = 0; i < arr.length; i++){
