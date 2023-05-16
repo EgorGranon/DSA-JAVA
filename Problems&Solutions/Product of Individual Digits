@@ -1,0 +1,24 @@
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(prodOfDigRec(1234));
+        System.out.println(prodOfDig(1234));
+        }
+
+    private static int prodOfDig(int i) {
+        int ans = 1;
+        while(i > 0){
+            int rem = i % 10;
+            ans = ans * rem;
+            i /= 10;
+        }
+        return ans;
+    }
+
+    private static int prodOfDigRec(int i) {
+        if(i % 10 == i){
+            return i;
+        }
+        return i % 10 * prodOfDigRec(i / 10);
+    }
+}
