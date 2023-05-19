@@ -1,0 +1,19 @@
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        pattern28(5);
+    }
+    private static void pattern28(int n) {
+        for(int row = 1; row < n * 2; row++){
+            int sp = row <= n ? n - row : row - n;
+            int star = row <= n ? row : n * 2 - row;
+            for(int i = 1; i <= sp; i++){
+                System.out.print(" ");
+            }
+            for(int i = 1; i <= star; i++){
+                System.out.print(" *");
+            }
+            System.out.println();
+        }
+    }
+}
