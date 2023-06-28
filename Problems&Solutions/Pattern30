@@ -1,0 +1,21 @@
+public class Main {
+    public static void main(String[] args) {
+        pattern30(5);
+    }
+
+    private static void pattern30(int n) {
+        for(int row = 1; row <= n; row++){
+            int space = n - row;
+            for(int s = 1; s <= space; s++){
+                System.out.print(" ");
+            }
+            for(int countDown = row; countDown >= 1; countDown--){
+                System.out.print(countDown);
+            }
+            for(int countUP = 2; countUP <= row; countUP++){
+                System.out.print(countUP);
+            }
+            System.out.println();
+        }
+    }
+}
